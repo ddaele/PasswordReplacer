@@ -1,2 +1,109 @@
-# PasswordReplacer
- verander mpass in het ww van de ini
+# Password Replacer
+
+An AutoHotkey utility that allows you to quickly insert a stored password using a simple hotstring.
+
+## ⚠️ Security Warning
+
+**IMPORTANT:** This script stores passwords in **plaintext** in an INI file. This is **not secure** for sensitive passwords. Only use this for:
+- Testing/Development passwords
+- Non-critical accounts
+- Local machine only
+
+**DO NOT use for:**
+- Banking passwords
+- Email account passwords
+- Administrative credentials
+- Any production system passwords
+
+For better security, consider using dedicated password managers like 1Password, Bitwarden, or KeePass.
+
+## Features
+- Simple hotstring-based password insertion: Type `mpass` + Enter
+- Set/update passwords with `setpass` hotstring
+- Passwords stored in `PRSettings.ini` file
+- Works in any application that accepts text input
+- Lightweight and unobtrusive
+
+## Requirements
+- AutoHotkey v1.1 or later
+- Windows operating system
+
+## Installation
+1. Install [AutoHotkey](https://www.autohotkey.com/)
+2. Download `PasswordReplacer.ahk`
+3. Run the script by double-clicking it
+4. The script runs silently in the background
+
+## Usage
+
+### Setting Your Password
+1. Type `setpass` and press Enter
+2. A dialog box will appear asking for your password
+3. Enter your password (it will be hidden)
+4. Press OK
+5. You'll see a confirmation message
+
+### Using Your Password
+1. In any text field, type `mpass` and press Enter
+2. Your stored password will be automatically inserted
+3. The password is inserted as if you typed it
+
+## Files
+- `PasswordReplacer.ahk` - Main script file
+- `PRSettings.ini` - Configuration file (created automatically)
+
+## Configuration
+You can edit `PRSettings.ini` manually if needed:
+```ini
+[settings]
+ww=yourpasswordhere
+```
+
+## How It Works
+The script:
+1. Checks if `PRSettings.ini` exists
+2. Stores passwords in the `[settings]` section under key `ww`
+3. Retrieves passwords when `mpass` hotstring is triggered
+4. Uses `SendInput` to type the password into the active window
+
+## Troubleshooting
+
+### "No password saved" error
+- This means the script hasn't been run with `setpass` yet
+- Type `setpass` and Enter to create your first password
+
+### Password not inserting
+- Make sure you're in a text input field
+- The script must be running (check AutoHotkey icon in system tray)
+- Some applications may block automated input; try using the clipboard instead
+
+### Password file not found
+- The `PRSettings.ini` file should be in the same directory as the script
+- Recreate it by running `setpass` hotstring
+
+## Hotstrings Reference
+| Hotstring | Action |
+|-----------|--------|
+| `setpass` | Open dialog to set/update password |
+| `mpass` | Insert stored password |
+
+## Limitations
+- Passwords stored in plaintext (security risk)
+- Only one password can be stored
+- No password encryption
+- Requires AutoHotkey to be running
+- Some applications may block automated text input
+
+## Future Improvements
+- [ ] Add password encryption using Windows DPAPI
+- [ ] Support multiple passwords with labels
+- [ ] Add password strength validation
+- [ ] Implement master password protection
+- [ ] Add clipboard-based password insertion option
+- [ ] Create Windows exe wrapper for easier distribution
+
+## License
+Free to use and modify
+
+## Disclaimer
+This script is provided as-is. The author is not responsible for any data loss or security issues. Use at your own risk and only for appropriate use cases.
